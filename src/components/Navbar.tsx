@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import logo from '../assets/image/logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaShoppingCart, FaUserCircle } from 'react-icons/fa';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -71,9 +71,6 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/productos">Productos</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link text-white" to="/carrito">Carrito</Link>
-              </li>
               
             </>
           )}
@@ -97,6 +94,9 @@ const Navbar = () => {
         </ul>
 
         <ul className="navbar-nav">
+          <li className="nav-item">
+                <Link className="nav-link text-white" to="/carrito"><FaShoppingCart size={24} /></Link>
+              </li>
           <li className="nav-item dropdown">
             <button
               className="btn nav-link dropdown-toggle d-flex align-items-center gap-2 text-white"

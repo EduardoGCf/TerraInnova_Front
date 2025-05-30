@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { crearPedido } from '../services/pedidoService';
 import logo from '../assets/image/logo.png';
+import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { FaShoppingCart } from "react-icons/fa";
 
 interface ItemCarrito {
   id: number;
@@ -99,7 +101,7 @@ export default function CarritoPage() {
 
   return (
     <div className="container my-5">
-      <h2 className="text-center mb-4">🛒 Carrito de Compras</h2>
+      <h2 className="text-center mb-4"> <FaShoppingCart size={24} /> Carrito de Compras</h2>
 
       {carrito.length === 0 ? (
         <p className="text-center">No hay productos en el carrito.</p>
@@ -122,16 +124,24 @@ export default function CarritoPage() {
                   <h5 className="mb-1">{item.nombre}</h5>
                   <p className="mb-1">Precio unitario: <strong>${item.precio.toFixed(2)}</strong></p>
                   <div className="d-flex align-items-center mt-2">
-                    <button className="btn btn-sm btn-outline-success me-2" onClick={() => aumentarCantidad(item.id)}>➕</button>
-                    <span className="mx-2">{item.cantidad}</span>
-                    <button className="btn btn-sm btn-outline-warning me-3" onClick={() => disminuirCantidad(item.id)}>➖</button>
+                    <button className="btn btn-sm btn-outline-secondary me-2" onClick={() => aumentarCantidad(item.id)}>
+                    <FaPlus />
+                  </button>
+                  <span className="mx-2">{item.cantidad}</span>
+                  <button className="btn btn-sm btn-outline-secondary me-3" onClick={() => disminuirCantidad(item.id)}>
+                    <FaMinus />
+                  </button>
                   </div>
                 </div>
 
                 <div className="text-end">
                   <h6 className="text-muted mb-0">Subtotal:</h6>
                   <h5 className="text-dark">${(item.precio * item.cantidad).toFixed(2)}</h5>
-                  <button className="btn btn-sm btn-outline-danger ms-auto" onClick={() => eliminarItem(item.id)}>🗑️ Eliminar</button>
+                  <button className="btn btn-sm btn-outline-danger mt-2 d-flex align-items-center gap-2" onClick={() => eliminarItem(item.id)}>
+  <FaTrashAlt />
+  Eliminar
+</button>
+
                 </div>
               </div>
             ))}
@@ -140,7 +150,7 @@ export default function CarritoPage() {
           {/* TOTAL Y BOTÓN */}
           <div className="d-flex justify-content-between align-items-center mt-4 p-3 rounded shadow" style={{ backgroundColor: '#e8f5e9' }}>
             <button className="btn btn-success px-4 py-2" onClick={hacerPedido}>
-              ✅ Hacer pedido
+              Hacer pedido
             </button>
             <h4 className="mb-0">TOTAL: ${total.toFixed(2)}</h4>
           </div>
