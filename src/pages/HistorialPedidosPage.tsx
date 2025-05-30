@@ -24,7 +24,7 @@ const HistorialPedidosPage = () => {
         console.log('🔐 Token cargado:', token);
 
         if (!user?.sub) {
-          console.error('❌ ID de usuario no encontrado');
+          console.error(' ID de usuario no encontrado');
           return;
         }
 
