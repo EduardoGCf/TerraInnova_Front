@@ -30,7 +30,6 @@ export default function ProductosPage() {
     }
 
     localStorage.setItem('carrito', JSON.stringify(carritoActual));
-    alert('Producto agregado al carrito');
   };
 
   return (

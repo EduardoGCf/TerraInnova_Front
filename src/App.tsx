@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {Router, Routes, Route } from 'react-router-dom';
 import ProductosPage from './pages/ProductosPage';
 import CarritoPage from './pages/CarritoPage';
 import LoginPage from './pages/LoginPage';
@@ -9,23 +9,26 @@ import AdminPedidosPage from './pages/AdminPedidosPage';
 import AdminCategoriasPage from './pages/AdminCategoriasPage';
 import AdminProductosPage from './pages/AdminProductosPage';
 import Navbar from './components/Navbar';
-
+import Footer2 from './components/Footer2';
+import HomePage from './pages/HomePage';
+import {BrowserRouter} from 'react-router-dom';
 function App() {
   return (
     
-    <Router>
+    <BrowserRouter>
       
       <Navbar />
 
-      <div className="container mt-4">
-        
         <Routes>
           {/* Cliente */}
-          <Route path="/" element={<ProductosPage />} />
+          
+          <Route path="/" element={<HomePage />} />
+          <Route path="/productos" element={<ProductosPage />} />
           <Route path="/carrito" element={<CarritoPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/historial" element={<HistorialPedidosPage />} />
+
 
           {/* Admin */}
           <Route path="/admin" element={<AdminDashboardPage />} />
@@ -33,8 +36,9 @@ function App() {
           <Route path="/admin/categorias" element={<AdminCategoriasPage />} />
           <Route path="/admin/productos" element={<AdminProductosPage />} />
         </Routes>
-      </div>
-    </Router>
+
+        <Footer2 />
+    </BrowserRouter>
   );
 }
 

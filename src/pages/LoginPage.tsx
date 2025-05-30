@@ -37,8 +37,9 @@ export default function LoginPage() {
       } else {
         console.warn('No se pudo decodificar el token');
       }
-
       navigate('/');
+      window.location.reload(); // Recargar la página para actualizar el estado de autenticación
+      
     } catch (err) {
       setError('Credenciales inválidas');
     }

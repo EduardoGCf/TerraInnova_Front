@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getProductos, createProducto, deleteProducto } from '../services/product.service';
+import { getProductos, createProducto, deleteProducto, uploadImagenProducto } from '../services/product.service';
 import { getCategorias } from '../services/categoria.service';
 import type { Producto } from '../models/Product';
 import type { Categoria } from '../models/Categoria';
@@ -11,6 +11,7 @@ const AdminProductosPage = () => {
   const [descripcion, setDescripcion] = useState('');
   const [precio, setPrecio] = useState(0);
   const [categoriaId, setCategoriaId] = useState<number | ''>('');
+  const [imagen, setImagen] = useState<File | null>(null);
 
   useEffect(() => {
     cargarProductos();
@@ -29,20 +30,33 @@ const AdminProductosPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nombre || !descripcion || !precio || !categoriaId) return;
+    try {
+      if (!nombre || !descripcion || !precio || !categoriaId) return;
 
-    await createProducto({
-      nombre,
-      descripcion,
-      precio,
-      categoria: { id: categoriaId as number },
-    });
+      // 1. Crear el producto
+      const nuevo = await createProducto({
+        nombre,
+        descripcion,
+        precio,
+        categoria: { id: categoriaId as number },
+      });
 
-    setNombre('');
-    setDescripcion('');
-    setPrecio(0);
-    setCategoriaId('');
-    cargarProductos();
+      // 2. Subir la imagen si existe
+      if (imagen) {
+        await uploadImagenProducto(nuevo.id, imagen);
+      }
+
+      alert('Producto creado con imagen');
+      setNombre('');
+      setDescripcion('');
+      setPrecio(0);
+      setCategoriaId('');
+      setImagen(null);
+      cargarProductos();
+    } catch (error) {
+      console.error('Error al crear producto o subir imagen:', error);
+      alert('Ocurrió un error al crear el producto');
+    }
   };
 
   const handleDelete = async (id: number) => {
@@ -101,7 +115,19 @@ const AdminProductosPage = () => {
             </select>
           </div>
         </div>
-        <button className="btn btn-primary mt-3" type="submit">Agregar Producto</button>
+
+        <div className="row mt-3">
+          <div className="col-md-6">
+            <input
+              type="file"
+              className="form-control"
+              onChange={(e) => setImagen(e.target.files?.[0] || null)}
+            />
+          </div>
+          <div className="col-md-6">
+            <button className="btn btn-primary w-100" type="submit">Agregar Producto</button>
+          </div>
+        </div>
       </form>
 
       <ul className="list-group">
