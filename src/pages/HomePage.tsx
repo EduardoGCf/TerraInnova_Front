@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import { getProductos } from '../services/product.service';
 import type { Producto } from '../models/Product';
 import  tik  from '../assets/image/tik.png';
+import foto1 from '../assets/image/1.jpg';
+import foto2 from '../assets/image/2.jpg';
+import foto3 from '../assets/image/3.jpg';
+import foto4 from '../assets/image/4.jpg';
 
 export default function HomePage() {
 const [productos, setProductos] = useState<Producto[]>([]);
@@ -39,25 +43,26 @@ const agregarAlCarrito = (producto: Producto) => {
 const beneficios = [
   {
     icon: <FaTruck size={30} color="white" />,
-    title: "Free Shipping",
-    subtitle: "Free on orders over $300",
+    title: "Envío Gratis",
+    subtitle: "Gratis en pedidos superiores a $300",
   },
   {
     icon: <FaShieldAlt size={30} color="white" />,
-    title: "Security Payment",
-    subtitle: "100% security payment",
+    title: "Pago Seguro",
+    subtitle: "Pago 100% seguro",
   },
   {
     icon: <FaExchangeAlt size={30} color="white" />,
-    title: "30 Day Return",
-    subtitle: "30 day money guarantee",
+    title: "Devolución en 30 Días",
+    subtitle: "Garantía de devolución por 30 días",
   },
   {
     icon: <FaPhoneAlt size={30} color="white" />,
-    title: "24/7 Support",
-    subtitle: "Support every time fast",
+    title: "Soporte 24/7",
+    subtitle: "Atención rápida en todo momento",
   },
 ];
+
 
 
   return (
@@ -77,7 +82,7 @@ const beneficios = [
         <h1
           className="fw-bold m-0"
           style={{
-            fontFamily: '"Playfair Display", serif',
+            fontFamily: "'Open Sans', sans-serif",
             fontSize: '2rem',
             lineHeight: '1.3',
             color: '#fff',
@@ -85,7 +90,7 @@ const beneficios = [
             maxWidth: '60%',
           }}
         >
-          TerraINNOVA: Nutriendo la tierra, cosechando futuro
+          TERRAINNOVA: Nutriendo la tierra, cosechando futuro
         </h1>
 
         {/* Logo */}
@@ -107,32 +112,31 @@ const beneficios = [
       {/* Beneficios */}
 
   <section className="container py-5">
-    <div className="row text-center">
-      {beneficios.map((item, index) => (
-        <div className="col-12 col-sm-6 col-md-3 mb-4" key={index}>
+  <div className="row text-center">
+    {beneficios.map((item, index) => (
+      <div className="col-12 col-sm-6 col-md-3 mb-4" key={index}>
+        <div className="d-flex flex-column align-items-center p-3 bg-light rounded shadow-sm h-100">
           <div
-            className="d-flex flex-column align-items-center p-3 bg-light rounded shadow-sm h-100"
+            className="rounded-circle d-flex align-items-center justify-content-center mb-3"
+            style={{ width: "60px", height: "60px", backgroundColor: "#1B4312" }}
           >
-            <div
-              className="bg-warning rounded-circle d-flex align-items-center justify-content-center mb-3"
-              style={{ width: "60px", height: "60px" }}
-            >
-              {item.icon}
-            </div>
-            <h6 className="fw-bold mb-1">{item.title}</h6>
-            <small>{item.subtitle}</small>
+            {item.icon}
           </div>
+          <h6 className="fw-bold mb-1">{item.title}</h6>
+          <small>{item.subtitle}</small>
         </div>
-      ))}
-    </div>
-  </section>
+      </div>
+    ))}
+  </div>
+</section>
+
 
 {/* SOBRE NOSOTROS */}
 <section className="container text-center py-5">
   <h2
     className="fw-bold mb-4"
     style={{
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: "'Open Sans', sans-serif",
       color: "#2d572c",
     }}
   >
@@ -233,26 +237,24 @@ const beneficios = [
     </button>
 
     <div
-      className="d-flex gap-3 overflow-auto justify-content-center flex-nowrap"
-      style={{ maxWidth: '80%' }}
-    >
-      {[1, 2, 3].map((id) => (
-        <img
-          key={id}
-          src={`http://localhost:3000/uploads/album/${id}.jpg`}
-          alt="foto"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = logo;
-          }}
-          style={{
-            height: '160px',
-            width: 'auto',
-            borderRadius: '8px',
-            objectFit: 'cover',
-          }}
-        />
-      ))}
-    </div>
+  className="d-flex gap-3 overflow-auto justify-content-center flex-nowrap"
+  style={{ maxWidth: '80%' }}
+>
+  {[foto1, foto2, foto3, foto4].map((imagen, index) => (
+    <img
+      key={index}
+      src={imagen}
+      alt={`Foto ${index + 1}`}
+      style={{
+        height: '160px',
+        width: 'auto',
+        borderRadius: '8px',
+        objectFit: 'cover',
+      }}
+    />
+  ))}
+</div>
+
 
     <button
       className="btn"
